@@ -1,4 +1,6 @@
 env
+people/migrations
+db.*
 *.DS_Store
 *.pyc
 __pycache__

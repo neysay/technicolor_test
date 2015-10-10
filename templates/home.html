@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>TechniColor Project</title>
+</head>
+<body>
+{% block content %}
+    <form method='POST' action='' class="bootstrap3" >
+        {% csrf_token %}
+        {% crispy form %}
+        <!--<input class='btn btn-primary' type='submit' value='Sign up' />-->
+    </form>
+
+{% endblock %}
+
+
+</body>
+
+</html>
