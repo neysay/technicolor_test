@@ -17,13 +17,15 @@
 
         <div class="col-sm-6">
             <form method='POST' action='' class="bootstrap3" >
-                <p>Search Database</p>
+                {% csrf_token %}
+                {% crispy signup %}
                  <!--<input class='btn btn-primary' type='submit' value='Sign up' />-->
             </form>
         </div>
         <div class="col-sm-6">
             <form method='POST' action='' class="bootstrap3" >
-               <p>Search File System</p>
+                {% csrf_token %}
+                {% crispy login %}
                  <!--<input class='btn btn-primary' type='submit' value='Sign up' />-->
             </form>
         </div>

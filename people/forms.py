@@ -9,6 +9,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
 from django.contrib.auth.forms import UserCreationForm
 from .models import UserProfile
+from django.contrib.auth import authenticate
 
 
 class UserCreationFormExtended(UserCreationForm):
@@ -62,12 +63,8 @@ class UserCreationFormExtended(UserCreationForm):
     def clean_username(self):
         username = self.cleaned_data['username']
         if User.objects.exclude(pk=self.instance.pk).filter(username=username).exists():
-            print
-            print "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-            print "ATTEMPTING TO RAISE VALIDATION ERROR"
-            print "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-            print
             raise forms.ValidationError(u'Username "%s" is already in use.' % username,code='invalid')
+
         return username
 
     def clean(self):
@@ -126,3 +123,28 @@ class AuthenticationForm(forms.Form):
 
     class Meta:
         fields = ['username', 'password']
+
+    """
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if not User.objects.filter(username=username).exists():
+            raise forms.ValidationError(u'Username "%s" Does not exist, please register username' %
+                                        username,code='invalid')
+
+        return username
+    """
+
+    def clean(self):
+        """
+        Verifies that the values entered into the password fields match
+
+        NOTE: Errors here will appear in ``non_field_errors()`` because it applies to more than one field.
+        """
+
+        if 'username' in self.cleaned_data and 'password' in self.cleaned_data:
+            user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
+            if user is None or not user.is_active:
+                raise forms.ValidationError(u'username or password is invalid', code='invalid')
+
+
+        return self.cleaned_data
