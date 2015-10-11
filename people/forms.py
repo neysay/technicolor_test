@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
 from django.contrib.auth.forms import UserCreationForm
+from .models import UserProfile
 
 
 class UserCreationFormExtended(UserCreationForm):
@@ -58,6 +59,17 @@ class UserCreationFormExtended(UserCreationForm):
 
         return email
 
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if User.objects.exclude(pk=self.instance.pk).filter(username=username).exists():
+            print
+            print "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+            print "ATTEMPTING TO RAISE VALIDATION ERROR"
+            print "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+            print
+            raise forms.ValidationError(u'Username "%s" is already in use.' % username,code='invalid')
+        return username
+
     def clean(self):
         """
         Verifies that the values entered into the password fields match
@@ -71,4 +83,46 @@ class UserCreationFormExtended(UserCreationForm):
         return self.cleaned_data
 
 
+    def save(self, commit=True):
+            newUser = super(UserCreationFormExtended, self).save(commit=False)
+            newUser.email = self.cleaned_data["email"]
+            newUser.set_password(self.cleaned_data['password1'])
+            newUser.first_name = self.cleaned_data['first_name']
+            newUser.last_name = self.cleaned_data['last_name']
+            newUser.username = self.cleaned_data['username']
 
+            profile = None
+            if commit:
+                newUser.save()
+                profile = UserProfile.objects.create(user=newUser,
+                                                 city=self.cleaned_data['city'],
+                                                 state=self.cleaned_data['state'])
+
+            return newUser , profile
+
+
+
+class AuthenticationForm(forms.Form):
+    """
+    Login form
+    """
+    username = forms.CharField(widget=forms.widgets.TextInput(attrs={'placeHolder':'username'}),label='')
+    password = forms.CharField(widget=forms.widgets.PasswordInput(attrs={'placeHolder':'Enter Password'}),label='')
+
+
+
+    def __init__(self, *args, **kwargs):
+        super(AuthenticationForm, self).__init__(*args, **kwargs)
+        self.fields['username'].required = True
+        self.fields['password'].required = True
+
+        self.helper = FormHelper(self)
+        self.helper.form_method = 'POST'
+        self.helper.layout = Layout('username',
+                                    'password',
+                                    Submit('submit','Login',css_class='btn-primary')
+                                    )
+
+
+    class Meta:
+        fields = ['username', 'password']
