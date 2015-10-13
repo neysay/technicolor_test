@@ -24,6 +24,8 @@ Now, you need the *JobSnap* project files in your workspace:
     $ cd technicolor_test
     $ virtualenv env
     $ source env/bin/activate
+    
+    $(to exit virtualenv) deactivate  (Don't do this yet though)
 
 ### 2. Requirements
 Right there, you will find the *requirements.txt* file that has all the great debugging tools, django helpers and some other cool stuff. To install them, simply type:
@@ -40,13 +42,15 @@ Go to <http://www.miniwebtool.com/django-secret-key-generator/>, create your sec
 #### Initialize the database
 First set the database engine (PostgreSQL, MySQL, etc..) in your settings files; `technicolor_test/settings.py`. Of course, remember to install necessary database driver for your engine. Then define your credentials as well. Time to finish it up:
 
-`python manage.py migrate`
+    $python manage.py makemigrations
+    $python manage.py migrate
 
 ### Ready? Go!
 ```
 $ python manage.py runserver
 ```
-
+    Go to your browser with http://127.0.0.1:8000/
+    Now just sign up some users and then happy searching :)
 
 ## Explanations
 ```
