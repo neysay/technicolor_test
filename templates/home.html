@@ -1,39 +1,49 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 
-
-
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>TechniColor Project</title>
+    <meta charset="UTF-8">
+    <title>Search</title>
 </head>
 <body>
 {% block content %}
 
-    <div class="row text-center">
+<div class="row text-left">
 
-        <div class="col-sm-6">
-            <form method='POST' action='' class="bootstrap3" >
-                <p>Search Database</p>
-                 <!--<input class='btn btn-primary' type='submit' value='Sign up' />-->
-            </form>
-        </div>
-        <div class="col-sm-6">
-            <form method='POST' action='' class="bootstrap3" >
-               <p>Search File System</p>
-                 <!--<input class='btn btn-primary' type='submit' value='Sign up' />-->
-            </form>
-        </div>
+    <div class="col-xs-3">
+       <form action="" method="get">
+        {% csrf_token %}
+        {% crispy searchForm %}
+    </form>
+    </div>
+    <div class="col-xs-9">
+        <table class="table">
 
+            <tr>
+                {% for field in fields %}
+                <th>{{field}}</th>
+
+                {% endfor %}
+            </tr>
+            {% for item in query_results %}
+            <tr>
+                <td>{{ item.user.id }}</td>
+                <td>{{ item.user.get_full_name }}</td>
+                <td>{{ item.city }}</td>
+                <td>{{ item.state }}</td>
+                <td>{{ item.profession }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <!--<p><a href="/employer">Are you a company looking to hire?</a></p>-->
     </div>
 
+</div>
 
 {% endblock %}
-
-
 </body>
-
 </html>

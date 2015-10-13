@@ -9,3 +9,4 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,unique=True)
     city = models.CharField(max_length=25)
     state = models.CharField(max_length=2)
+    profession = models.CharField(max_length=25,blank=True,null=True)

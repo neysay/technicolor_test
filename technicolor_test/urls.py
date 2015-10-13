@@ -19,7 +19,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^$', 'people.views.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^register/$', 'people.views.register',name='register'),
     url(r'^login/$', 'people.views.signupLogin',name='signupLogin'),
     url(r'^logout/$', 'people.views.logout',name='logout'),
+
 ]

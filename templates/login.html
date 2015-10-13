@@ -16,6 +16,7 @@
     <div class="row text-center">
 
         <div class="col-sm-6">
+            <p>Signup</p>
             <form method='POST' action='' class="bootstrap3" >
                 {% csrf_token %}
                 {% crispy signup %}
@@ -23,6 +24,7 @@
             </form>
         </div>
         <div class="col-sm-6">
+            <p>Login</p>
             <form method='POST' action='' class="bootstrap3" >
                 {% csrf_token %}
                 {% crispy login %}
