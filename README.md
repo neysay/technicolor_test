@@ -89,4 +89,14 @@ In this case it would search by State , selectedState would be Nevada (NV) and t
 *if you leave 'selectedState' blank (i.e &selectedState=&groupBy=city)  Then it will default to select ALL users and then group by city
 ```
 
+## Sample Images
+![login_desktop](sample_images/login_signup.png)
 
+![home_desktop](sample_images/home_desktop.png)
+
+![search all and group by state](sample_images/search_all_groupby_state.png)
+![search by state group by city](sample_images/search_state.png)
+
+![search developers group by specified state](sample_images/search_developer.png)
+
+![search_mobile](sample_images/search_mobile.png)
