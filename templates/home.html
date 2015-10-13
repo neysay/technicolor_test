@@ -14,31 +14,37 @@
 
 <div class="row text-left">
 
-    <div class="col-xs-3">
+    <div class="col-sm-3">
        <form action="" method="get">
         {% csrf_token %}
         {% crispy searchForm %}
     </form>
     </div>
-    <div class="col-xs-9">
-        <table class="table">
+    <div class="col-sm-9">
+        <br>
+        <div class="table-responsive"></div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        {% for field in fields %}
+                        <th>{{field}}</th>
 
-            <tr>
-                {% for field in fields %}
-                <th>{{field}}</th>
-
-                {% endfor %}
-            </tr>
-            {% for item in query_results %}
-            <tr>
-                <td>{{ item.user.id }}</td>
-                <td>{{ item.user.get_full_name }}</td>
-                <td>{{ item.city }}</td>
-                <td>{{ item.state }}</td>
-                <td>{{ item.profession }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody id="myTable">
+                    {% for item in query_results %}
+                    <tr>
+                        <td>{{ item.user.id }}</td>
+                        <td>{{ item.user.get_full_name }}</td>
+                        <td>{{ item.city }}</td>
+                        <td>{{ item.state }}</td>
+                        <td>{{ item.profession }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
         <!--<p><a href="/employer">Are you a company looking to hire?</a></p>-->
     </div>
 
