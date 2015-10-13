@@ -48,7 +48,7 @@ $ python manage.py runserver
 ```
 
 
-### Explanations
+## Explanations
 ```
     *Django was chosen because it provided a good framework 
     to abstract model/view/controller components of the project. 
