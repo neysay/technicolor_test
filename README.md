@@ -48,6 +48,42 @@ $ python manage.py runserver
 ```
 
 
+### Explanations
+```
+    *Django was chosen because it provided a good framework 
+    to abstract model/view/controller components of the project. 
 
+    *Handles forms convienantly once you know a few gotchas 
+    about how django's form validation process
+
+    *Allowed me to make use of my python knowledge 
+    (I haven't done a terrible amount of javascript coding yet)
+
+    *Has built in modules for Users and login authentication
+
+    *Built in ORM to handle queries regardless of database chosen.  
+    (Although that abstraction is not so great for the 'group by' case, 
+    as I found out while working on this)
+```
+
+
+### Things to still Do:
+     Add Pagination to search tables -> https://docs.djangoproject.com/en/1.8/topics/pagination/
+     Add searching of file system
+     Add status checking of all dependent components -> https://docs.djangoproject.com/en/1.8/topics/testing/tools/
+
+
+### Examples
+```
+In general you can trigger everything interactively through the webpage, however
+if you want to search by using a url endpoint directly you can as such:
+
+http://127.0.0.1:8000/?&searchBy=state&searchSelect=NV&groupBy=city&search=Search
+
+This will fill in the form with the specified data and submit it.
+In this case it would search by State , selectedState would be Nevada (NV) and then group them by city
+
+*if you leave 'selectedState' blank (i.e &selectedState=&groupBy=city)  Then it will default to select ALL users and then group by city
+```
 
 
