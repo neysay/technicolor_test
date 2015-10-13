@@ -40,7 +40,7 @@ Go to <http://www.miniwebtool.com/django-secret-key-generator/>, create your sec
 
 
 #### Initialize the database
-First set the database engine (PostgreSQL, MySQL, etc..) in your settings files; `technicolor_test/settings.py`. Of course, remember to install necessary database driver for your engine. Then define your credentials as well. Time to finish it up:
+First set the database engine (PostgreSQL, MySQL, etc..) in your settings files; `technicolor_test/settings.py`. Of course, remember to install necessary database driver for your engine. Then define your credentials as well. Time to finish it up: (If you do not set a db manually sqlite will be used and a db generated for you)
 
     $python manage.py makemigrations
     $python manage.py migrate
