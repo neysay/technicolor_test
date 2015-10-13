@@ -64,6 +64,9 @@ $ python manage.py runserver
     *Built in ORM to handle queries regardless of database chosen.  
     (Although that abstraction is not so great for the 'group by' case, 
     as I found out while working on this)
+    
+    *Choose to add bootstrap with crispy-forms for nice form validation
+    handling.  Added bonus makes webpage mobile responsive for free.
 ```
 
 
