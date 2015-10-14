@@ -17,7 +17,7 @@ wsgiref==0.1.2
 ## Installation
 
 ### 1. Download
-Now, you need the *JobSnap* project files in your workspace:
+Now, you need the *technicolor_test* project files in your workspace:
 
     $ cd /path/to/your/workspace
     $ git clone https://github.com/neysay/technicolor_test.git technicolor_test
